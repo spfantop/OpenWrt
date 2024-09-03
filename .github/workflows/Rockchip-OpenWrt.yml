@@ -10,7 +10,7 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: configs/rockchip.config
   EXTRA_CONFIG: configs/extra.config
-  DIY_SCRIPT: diy-script.sh
+  DIY_SCRIPT: diy-mini.sh
   CLASH_KERNEL: arm64
   CACHE_TOOLCHAIN: true
   UPLOAD_BIN_DIR: false
@@ -182,7 +182,7 @@ jobs:
           - ⚽ 固件源码: ${{ env.REPO_URL }}
           - 💝 源码分支: ${{ env.REPO_BRANCH }}
           - 🚀 内核版本: ${{ env.KERNEL }}
-          - 🌐 默认地址: 192.168.1.1
+          - 🌐 默认地址: 192.168.2.1
           - 🔑 默认密码: password
           ### 🧊 固件版本
           - 固件编译前最后一次➦[主源码](${{ env.REPO_URL }})更新记录
