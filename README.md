@@ -19,6 +19,7 @@
 - ARMv8 盒子固件分为 [Mini版](https://github.com/haiibo/OpenWrt/releases/tag/ARMv8_MINI) 和 [Plus版](https://github.com/haiibo/OpenWrt/releases/tag/ARMv8_PLUS)，Mini 精简版以科学上网为主，Plus 多功能版插件多适合折腾
 - ARMv8 系列固件包含 [F大](https://github.com/unifreq/openwrt_packit) 发布的所有已适配的盒子固件，并提供 Docker 镜像固件[➦使用方法](https://hub.docker.com/r/summary/openwrt-aarch64)
 - 固件集成的所有 ipk 插件全部打包在 Packages 文件中，可以在 [Releases](https://github.com/haiibo/OpenWrt/releases) 内进行下载
+- 默认 LuCI 主题和首页仪表盘为 [Vantage](https://github.com/anothaDev/luci-theme-vantage)（固定使用 `v1.0.14` 版本）
 - 项目编译的固件插件为最新版本，最新版插件可能有 BUG，如果之前使用稳定则无需追新
 - 第一次使用请采用全新安装，避免出现升级失败以及其他一些可能的 BUG
 
@@ -226,7 +227,7 @@
 3. 下载源代码，更新 feeds 并安装到本地
 
    ```bash
-   git clone https://github.com/coolsnowwolf/lede
+   git clone https://github.com/coolsnowwolf/lede.git
    cd lede
    ./scripts/feeds update -a
    ./scripts/feeds install -a
