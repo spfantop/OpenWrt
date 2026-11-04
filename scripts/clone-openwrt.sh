@@ -11,7 +11,7 @@ destination="${3:-openwrt}"
 # workflow fails.
 rm -rf -- "$destination"
 for attempt in 1 2 3; do
-    if git -c http.sslBackend=openssl -c http.version=HTTP/1.1 clone \
+    if git -c http.version=HTTP/1.1 clone \
         --depth=1 \
         --single-branch \
         --no-tags \

@@ -20,9 +20,8 @@ rm -rf feeds/luci/applications/luci-app-netdata
 # Git稀疏克隆，只克隆指定目录到本地
 function git_sparse_clone() {
   branch="$1" repourl="$2" && shift 2
-  git -c http.sslBackend=openssl -c http.version=HTTP/1.1 clone --depth=1 -b "$branch" --single-branch --filter=blob:none --sparse "$repourl"
+  git -c http.version=HTTP/1.1 clone --depth=1 -b "$branch" --single-branch --filter=blob:none --sparse "$repourl"
   repodir=$(echo $repourl | awk -F '/' '{print $(NF)}')
-  git -C "$repodir" config http.sslBackend openssl
   git -C "$repodir" config http.version HTTP/1.1
   cd "$repodir" && git sparse-checkout set "$@"
   mv -f "$@" ../package
