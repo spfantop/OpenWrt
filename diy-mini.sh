@@ -129,3 +129,11 @@ sed -i 's|admin\\|admin\\/services\\|g' feeds/luci/applications/luci-app-dockerm
 if [ -f feeds/helloworld/gn/Makefile ] && ! grep -q 'CC=gcc CXX=g++ AR=ar' feeds/helloworld/gn/Makefile; then
   sed -i 's|\$(PYTHON) \$(HOST_BUILD_DIR)/build/gen.py|CC=gcc CXX=g++ AR=ar $(PYTHON) $(HOST_BUILD_DIR)/build/gen.py|' feeds/helloworld/gn/Makefile
 fi
+
+# 旧 packages feed 的 Vim 8.2 recipe 在 vim-fuller 打包时直接复制 runtime，先补生成步骤。
+vim_makefile=feeds/packages/utils/vim/Makefile
+if [ -f "$vim_makefile" ] && grep -q 'PKG_VERSION:=8.2' "$vim_makefile" \
+  && grep -q '\$(CP) \$(PKG_INSTALL_DIR)/usr/share/vim/vim\$(VIMVER)' "$vim_makefile" \
+  && ! sed -n '/^define Package\/vim-fuller\/install$/,/^endef$/p' "$vim_makefile" | grep -q 'installrtbase'; then
+  sed -i '/\$(CP) \$(PKG_INSTALL_DIR)\/usr\/share\/vim\/vim\$(VIMVER)/i\	\$(MAKE) -C \$(PKG_BUILD_DIR)\/src DESTDIR="\$(PKG_INSTALL_DIR)" installrtbase' "$vim_makefile"
+fi
