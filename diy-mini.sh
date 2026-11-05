@@ -124,3 +124,8 @@ sed -i 's|admin\\|admin\\/services\\|g' feeds/luci/applications/luci-app-dockerm
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
+
+# GN 默认使用 clang++；Ubuntu Runner 的 clang 与 libstdc++12 在 C++23 ranges 处不兼容，改用 GCC 构建 host 工具。
+if [ -f feeds/helloworld/gn/Makefile ] && ! grep -q 'CC=gcc CXX=g++ AR=ar' feeds/helloworld/gn/Makefile; then
+  sed -i 's|\$(PYTHON) \$(HOST_BUILD_DIR)/build/gen.py|CC=gcc CXX=g++ AR=ar $(PYTHON) $(HOST_BUILD_DIR)/build/gen.py|' feeds/helloworld/gn/Makefile
+fi
